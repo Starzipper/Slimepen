@@ -2,22 +2,43 @@
 {
     public class SlimeRepository : ISlimeRepository
     {
-        public List<Slime> Slimes { get; set; }
-        public Slime GetSlime(int id)
+        public List<Slime> Slimes { get; set; } = new List<Slime>()
         {
-            return Slimes.ElementAt(id);
+            new Slime
+            {
+                ID = Guid.NewGuid(),
+                Name = "Bob",
+                Sex = 'M',
+                Color = "FF00FF"
+            },
+            new Slime
+            {
+                ID = Guid.NewGuid(),
+                Name = "Bobbilina",
+                Sex = 'F',
+                Color = "00FF00"
+            }
+        };
+        public Slime GetSlime(Guid? id)
+        {
+            return Slimes.First(slime => slime.ID == id);
+        }
+        public List<Slime> GetAllSlimes()
+        {
+            return Slimes;
         }
         public void UpdateSlime(Slime slime)
         {
-            Slimes[slime.ID] = slime;
+            
         }
         public void InsertSlime(Slime slime)
         {
-            Slimes.Insert(slime.ID, slime);
+            Slimes.Add(slime);
         }
-        public void DeleteSlime(int id)
+        public void DeleteSlime(Guid id)
         {
-            Slimes.RemoveAt(id);
+            var slime = Slimes.First(slime => slime.ID == id);
+            Slimes.Remove(slime);
         }
     }
 }
