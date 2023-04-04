@@ -2,9 +2,9 @@
 {
     public class Slime
     {
-        public Guid ID { get; set; }
+        public Guid ID { get; init; }
         public string Name { get; set; } = "Slime";
-        public char Sex { get; set; } = 'M';
-        public string Color { get; set; } = "000000";
+        public char Sex { get; init; } = 'M';
+        public string Color { get; init; } = "000000";
     }
 }

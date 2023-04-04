@@ -1,4 +1,4 @@
-using Slimepen.Models;
+using Slimepen.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,4 +1,6 @@
-﻿namespace Slimepen.Models
+﻿using Slimepen.Models;
+
+namespace Slimepen.Repositories
 {
     public class SlimeRepository : ISlimeRepository
     {
@@ -36,12 +38,11 @@
         {
             Slimes.Add(slime);
         }
-        public void DeleteSlime(Guid id)
+        public void DeleteSlime(Slime slime)
         {
-            var slime = Slimes.First(slime => slime.ID == id);
             Slimes.Remove(slime);
         }
-        public void BreedSlime(Slime slime1, Slime slime2)
+        public Slime BreedSlime(Slime slime1, Slime slime2)
         {
             var random = new Random();
             var randNum = random.Next(2);
@@ -60,6 +61,8 @@
             };
 
             Slimes.Add(newSlime);
+
+            return newSlime;
         }
     }
 }
