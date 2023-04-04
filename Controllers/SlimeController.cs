@@ -14,31 +14,52 @@ namespace Slimepen.Controllers
         }
 
         [HttpGet(Name = "GetSlime")]
-        public IEnumerable<Slime> Get([FromQuery]Guid? id)
+        public IActionResult GetSlime([FromQuery]Guid? id)
         {
-            if (id == null) return _repository.GetAllSlimes();
+            if (id == null) return Ok(_repository.GetAllSlimes());
 
             var slime = _repository.GetSlime(id);
-            return new List<Slime>() { slime };
+
+            if (slime == null) return NotFound();
+
+            return Ok(slime);
         }
 
         [HttpPost(Name = "PostSlime")]
-        public IActionResult Post(string name)
+        public IActionResult PostSlime(Slime slime)
+        {
+            var newSlime = new Slime
+            {
+                ID = Guid.NewGuid(),
+                Name = slime.Name,
+                Sex = slime.Sex,
+                Color = slime.Color
+            };
+            _repository.InsertSlime(newSlime);
+
+            return Ok(newSlime);
+        }
+
+        [HttpPut(Name = "PutSlime")]
+        public IActionResult PutSlime([FromQuery]Guid id, string name)
         {
             var slime = new Slime
             {
-                ID = Guid.NewGuid(),
+                ID = id,
                 Name = name,
                 Sex = 'M',
                 Color = "00FF00"
             };
-            _repository.InsertSlime(slime);
+            _repository.UpdateSlime(slime);
 
             return Ok(slime);
         }
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+
+        [HttpDelete(Name = "DeleteSlime")]
+        public IActionResult DeleteSlime([FromQuery]Guid id)
+        {
+            _repository.DeleteSlime(id);
+            return Ok();
+        }
     }
 }
