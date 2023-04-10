@@ -1,0 +1,18 @@
+CREATE DATABASE IF NOT EXISTS `slimepen`;
+USE `slimepen`;
+
+DROP TABLE IF EXISTS `slimes`;
+CREATE TABLE `slimes` (
+	`SlimeID` int(11) NOT NULL AUTO_INCREMENT,
+    `Name` varchar(45) NOT NULL DEFAULT 'Slime',
+    `Sex` tinyint(4) NOT NULL DEFAULT '0',
+    `HasBred` tinyint(4) NOT NULL DEFAULT '0',
+    `Birthday` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `Color` varchar(45) NOT NULL DEFAULT '000000',
+    PRIMARY KEY (`SlimeID`),
+    UNIQUE KEY `SlimeID_UNIQUE` (`SlimeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+LOCK TABLES `slimes` WRITE;
+INSERT INTO `slimes` VALUES (1, 'Slime', 0, 0, CURRENT_TIMESTAMP, '00FF00'),(2, 'Slime', 1, 0, CURRENT_TIMESTAMP, 'FF00FF');
+UNLOCK TABLES;

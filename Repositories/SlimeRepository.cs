@@ -11,19 +11,19 @@ namespace Slimepen.Repositories
                 ID = Guid.NewGuid(),
                 Name = "Bob",
                 Sex = 'M',
-                Color = "FF00FF"
+                Color = "ABCDEF"
             },
             new Slime
             {
                 ID = Guid.NewGuid(),
-                Name = "Bobbilina",
+                Name = "Bobbette",
                 Sex = 'F',
-                Color = "00FF00"
+                Color = "987654"
             }
         };
-        public Slime GetSlime(Guid? id)
+        public Slime GetSlime(Guid id)
         {
-            return Slimes.FirstOrDefault(slime => slime.ID == id);
+            return Slimes.First(slime => slime.ID == id);
         }
         public List<Slime> GetAllSlimes()
         {

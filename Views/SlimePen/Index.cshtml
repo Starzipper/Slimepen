@@ -1,0 +1,97 @@
+﻿@model SlimeBreedingGameModel
+@{
+    ViewData["Title"] = "SlimePen";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/styles.css">
+</head>
+<body>
+    <div id="header">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+    <div id="game-board">
+        <div class="panel panel-game">
+            <div class="panel-heading">
+                <h2 class="panel-title">My Slimes</h2>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @foreach (var slime in Model.Slimes)
+                    {
+                        <div class="col-md-4">
+                            <div class="slime">
+                                <img src="https://via.placeholder.com/150" />
+                                <p>Name: @slime.Name</p>
+                                <p>Color: @slime.Color</p>
+                                <p>Sex: @slime.Sex</p>
+                                <a href="/SlimePen/ViewSlime/@slime.ID">View</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-game">
+            <div class="panel-heading">
+                <h2 class="panel-title">Breed a New Slime</h2>
+            </div>
+            <div class="panel-body">
+                <form asp-controller="SlimePen" asp-action="BreedSlime" method="post">
+                    <div class="form-group">
+                        <label for="Parent1">Parent 1:</label>
+                            <select class="form-control" id="Parent1">
+                                @foreach (var slime in Model.Slimes)
+                                {
+                                    <option value="@slime.ID">@slime.Name</option>
+                                }
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Parent2">Parent 2:</label>
+                            <select class="form-control" id="Parent2">
+                                @foreach (var slime in Model.Slimes)
+                                {
+                                    <option value="@slime.ID">@slime.Name</option>
+                                }
+                            </select>
+                    </div>
+                    <input type="hidden" name="Parent1Id" id="Parent1Id" value="">
+                    <input type="hidden" name="Parent2Id" id="Parent2Id" value="">
+                    <button type="submit" class="btn btn-game">Breed</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        //Set default id values
+        $('#Parent1Id').val($('#Parent1').val());
+        $('#Parent2Id').val($('#Parent2').val());
+
+        //Update id values on change
+        $('#Parent1').on('change', function () {
+            var selectedId = $(this).val();
+            $('#Parent1Id').val(selectedId);
+        });
+
+        $('#Parent2').on('change', function () {
+            var selectedId = $(this).val();
+            $('#Parent2Id').val(selectedId);
+        });
+    </script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="~/scripts.js"></script>
+</body>
+</html>

@@ -1,89 +1,97 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Slimepen.Models;
-using Slimepen.Repositories;
-using System.Drawing;
+﻿//using Microsoft.AspNetCore.Mvc;
+//using Slimepen.Models;
+//using Slimepen.Repositories;
+//using System.Drawing;
 
-namespace Slimepen.Controllers
-{
-    [ApiController]
-    [Route("[controller]")]
-    public class SlimeController : ControllerBase
-    {
-        private readonly ISlimeRepository _repository;
-        public SlimeController(ISlimeRepository repository)
-        {
-            _repository = repository;
-        }
+//namespace Slimepen.Controllers
+//{
+//    [ApiController]
+//    [Route("[controller]")]
+//    public class SlimeController : Controller
+//    {
+//        private readonly ISlimeRepository _repository;
+//        public SlimeController(ISlimeRepository repository)
+//        {
+//            _repository = repository;
+//        }
 
-        [HttpGet(Name = "GetSlime")]
-        public IActionResult GetSlime([FromQuery] Guid? id)
-        {
-            if (id == null) return Ok(_repository.GetAllSlimes());
+//        public IActionResult Index()
+//        {
+//            return View(_repository.GetAllSlimes());
+//        }
+        
+//        [HttpGet(Name = "GetSlime")]
+//        public IActionResult GetSlime([FromQuery] Guid id)
+//        {
+//            if (id == null) return Ok(_repository.GetAllSlimes());
 
-            var slime = _repository.GetSlime(id);
+//            var slime = _repository.GetSlime(id);
 
-            if (slime == null) return NotFound($"Slime (ID: {id}) not found.");
+//            if (slime == null) return NotFound($"Slime (ID: {id}) not found.");
 
-            return Ok(slime);
-        }
+//            return Ok(slime);
+//        }
 
-        [HttpPost(Name = "PostSlime")]
-        public IActionResult PostSlime(Slime slime)
-        {
-            var newSlime = new Slime
-            {
-                ID = Guid.NewGuid(),
-                Name = slime.Name,
-                Sex = slime.Sex,
-                Color = slime.Color
-            };
-            _repository.InsertSlime(newSlime);
+//        [HttpPost(Name = "PostSlime")]
+//        public IActionResult PostSlime(Slime slime)
+//        {
+//            var newSlime = new Slime
+//            {
+//                ID = Guid.NewGuid(),
+//                Name = slime.Name,
+//                Sex = slime.Sex,
+//                Color = slime.Color
+//            };
+//            _repository.InsertSlime(newSlime);
 
-            return Ok(newSlime);
-        }
+//            return Ok(newSlime);
+//        }
 
-        [Route("/Breed")]
-        [HttpPost]
-        public IActionResult BreedSlime([FromQuery] Guid slimeID1, [FromQuery] Guid slimeID2)
-        {
-            if (slimeID1 == Guid.Empty || slimeID2 == Guid.Empty) return BadRequest("At least one Guid is null or empty.");
+//        [Route("/Breed")]
+//        [HttpPost]
+//        public IActionResult BreedSlime([FromQuery] Guid slimeID1, [FromQuery] Guid slimeID2)
+//        {
+//            if (slimeID1 == Guid.Empty || slimeID2 == Guid.Empty) return BadRequest("At least one Guid is null or empty.");
 
-            var slime1 = _repository.GetSlime(slimeID1);
-            var slime2 = _repository.GetSlime(slimeID2);
+//            var slime1 = _repository.GetSlime(slimeID1);
+//            var slime2 = _repository.GetSlime(slimeID2);
 
-            if (slime1 == null && slime2 == null) return NotFound($"Slimes (ID: {slimeID1} and ID: {slimeID2}) not found.");
-            if (slime1 == null) return NotFound($"Slime (ID: {slimeID1}) not found.");
-            if (slime2 == null) return NotFound($"Slime (ID: {slimeID2}) not found.");
+//            if (slime1 == null && slime2 == null) return NotFound($"Slimes (ID: {slimeID1} and ID: {slimeID2}) not found.");
+//            if (slime1 == null) return NotFound($"Slime (ID: {slimeID1}) not found.");
+//            if (slime2 == null) return NotFound($"Slime (ID: {slimeID2}) not found.");
 
-            var newSlime = _repository.BreedSlime(slime1, slime2);
-            return Ok(newSlime);
-        }
+//            if (slime1.ID == slime2.ID) return BadRequest("You cannot breed a slime with itself.");
+//            if (slime1.Sex == slime2.Sex) return BadRequest("You cannot yield offspring from two slimes of the same sex.");
 
-        [HttpPut(Name = "PutSlime")]
-        public IActionResult PutSlime([FromQuery] Guid id, string name)
-        {
-            var slime = _repository.GetSlime(id);
+//            var newSlime = _repository.BreedSlime(slime1, slime2);
+//            return Ok(newSlime);
+//        }
 
-            if (slime == null) return NotFound($"Slime (ID: {id}) not found.");
+//        [HttpPut(Name = "PutSlime")]
+//        public IActionResult PutSlime([FromQuery] Guid id, string name)
+//        {
+//            var slime = _repository.GetSlime(id);
 
-            slime.Name = name;
+//            if (slime == null) return NotFound($"Slime (ID: {id}) not found.");
 
-            _repository.UpdateSlime(slime);
+//            slime.Name = name;
 
-            return Ok(slime);
-        }
+//            _repository.UpdateSlime(slime);
 
-        [HttpDelete(Name = "DeleteSlime")]
-        public IActionResult DeleteSlime([FromQuery] Guid id)
-        {
-            if (id == Guid.Empty) return BadRequest("Guid was null or empty.");
+//            return Ok(slime);
+//        }
 
-            var slime = _repository.GetSlime(id);
+//        [HttpDelete(Name = "DeleteSlime")]
+//        public IActionResult DeleteSlime([FromQuery] Guid id)
+//        {
+//            if (id == Guid.Empty) return BadRequest("Guid was null or empty.");
 
-            if (slime == null) return NotFound($"Slime (ID: {id}) not found.");
+//            var slime = _repository.GetSlime(id);
 
-            _repository.DeleteSlime(slime);
-            return Ok($"Slime (ID: {id}) deleted.");
-        }
-    }
-}
+//            if (slime == null) return NotFound($"Slime (ID: {id}) not found.");
+
+//            _repository.DeleteSlime(slime);
+//            return Ok($"Slime (ID: {id}) deleted.");
+//        }
+//    }
+//}

@@ -1,0 +1,47 @@
+﻿@model Slime
+
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/styles.css">
+</head>
+
+<div id="game-board">
+    <div class="panel panel-game">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Model.Name</h2>
+            <form method="post" asp-action="RenameSlime">
+                <div class="form-group">
+                    <label for="Name">Name:</label>
+                    <input type="hidden" name="id" value="@Model.ID"/>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter new name" asp-for="Name" value="@Model.Name" required/>
+                </div>
+                <button type="submit" class="btn btn-game">Submit</button>
+            </form>
+            <img src="images/slimeimage.png" alt="Slime"/>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <th>Sex</th>
+                    <th>Color</th>
+                </tr>
+                <tr>
+                    <td>@Model.Sex</td>
+                    <td>@Model.Color</td>
+                </tr>
+            </table>
+            <form method="post" asp-action="DeleteSlime">
+                <div class="form-group">
+                    <input type="hidden" name="id" value="@Model.ID"/>
+                </div>
+                <button type="submit" class="btn btn-game">Delete Slime</button>
+            </form>
+            <a href="/SlimePen/Index/">Back</a>
+        </div>
+    </div>
+</div>

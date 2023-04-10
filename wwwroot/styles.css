@@ -1,0 +1,52 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  #header {
+    background-color: #3366cc;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+  
+  #game-board {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .panel-game {
+    margin-bottom: 30px;
+  }
+  
+  .slime {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .slime img {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .btn-game {
+    background-color: #3366cc;
+    color: #fff;
+    border: none;
+    margin-top: 10px;
+  }
+  
+  .btn-game:hover {
+    background-color: #204d74;
+    color: #fff;
+  }
+  
+  select.form-control {
+    max-width: 200px;
+    margin-right: 10px;
+  }
+  
