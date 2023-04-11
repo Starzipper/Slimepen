@@ -31,7 +31,7 @@
                 i++;
             }
 
-            for (i = hex.Length - 1; i >= 0; i--)
+            for (i = 0; i < hex.Length; i++)
             {
                 hexadecimal += hex[i];
             }

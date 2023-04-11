@@ -11,14 +11,14 @@ namespace Slimepen.Repositories
                 ID = Guid.NewGuid(),
                 Name = "Bob",
                 Sex = 'M',
-                Color = "ABCDEF"
+                Color = "FF0000"
             },
             new Slime
             {
                 ID = Guid.NewGuid(),
                 Name = "Bobbette",
                 Sex = 'F',
-                Color = "987654"
+                Color = "0000FF"
             }
         };
         public Slime GetSlime(Guid id)

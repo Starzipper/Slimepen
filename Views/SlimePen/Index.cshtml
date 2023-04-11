@@ -29,7 +29,7 @@
                     {
                         <div class="col-md-4">
                             <div class="slime">
-                                <img src="https://via.placeholder.com/150" />
+                                <img src="~/images/slimeimage.png" class="slime-img" data-color="#@slime.Color" />
                                 <p>Name: @slime.Name</p>
                                 <p>Color: @slime.Color</p>
                                 <p>Sex: @slime.Sex</p>
@@ -87,6 +87,12 @@
         $('#Parent2').on('change', function () {
             var selectedId = $(this).val();
             $('#Parent2Id').val(selectedId);
+        });
+
+        var slimes = document.querySelectorAll(".slime-img");
+        console.log(slimes);
+        slimes.forEach( function(slime, currentIndex, slimeList) {
+            slime.style.background = slime.getAttribute("data-color");
         });
     </script>
     <!-- Bootstrap JavaScript -->

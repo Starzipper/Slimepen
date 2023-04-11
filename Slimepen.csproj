@@ -21,6 +21,7 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
+    <None Include="wwwroot\images\slimeimage.png" />
     <None Include="wwwroot\styles.css" />
   </ItemGroup>
 
