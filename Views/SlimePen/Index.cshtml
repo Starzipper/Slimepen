@@ -21,7 +21,7 @@
     <div id="game-board">
         <div class="panel panel-game">
             <div class="panel-heading">
-                <h2 class="panel-title">My Slimes</h2>
+                <h1 class="panel-title">My Slimes</h1>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -31,9 +31,9 @@
                             <div class="slime">
                                 <img src="~/images/slimeimage.png" class="slime-img" data-color="#@slime.Color" data-sex="@slime.Sex" />
                                 <p>Name: @slime.Name</p>
-                                <p>Color: @slime.Color</p>
+                                <p>Color: #@slime.Color</p>
                                 <p>Sex: @slime.Sex</p>
-                                <a href="/SlimePen/ViewSlime/@slime.ID">View</a>
+                                <a href="/SlimePen/ViewSlime/@slime.ID" class="btn btn-game">View</a>
                             </div>
                         </div>
                     }
@@ -74,11 +74,11 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-        //Set default id values
+        // Set default id values
         $('#Parent1Id').val($('#Parent1').val());
         $('#Parent2Id').val($('#Parent2').val());
 
-        //Update id values on change
+        // Update id values on change
         $('#Parent1').on('change', function () {
             var selectedId = $(this).val();
             $('#Parent1Id').val(selectedId);
@@ -95,10 +95,6 @@
             var parent2 = document.getElementById("Parent2");
             var parent2Sex = parent2.options[parent2.selectedIndex].getAttribute('data-sex');
 
-            //if (parent1 === parent2) {
-            //    alert("You cannot breed a slime with itself.");
-            //    return false;
-            //}
             if (parent1Sex === parent2Sex) {
                 alert("You cannot yield offspring from two slimes of the same sex.");
                 return false;
@@ -107,6 +103,7 @@
             return true;
         }
 
+        // Colors slime images
         var slimes = document.querySelectorAll(".slime-img");
         console.log(slimes);
         slimes.forEach( function(slime, currentIndex, slimeList) {
@@ -115,7 +112,5 @@
     </script>
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- Custom JavaScript -->
-    @*<script src="~/scripts.js"></script>*@
 </body>
 </html>

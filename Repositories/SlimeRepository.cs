@@ -23,7 +23,7 @@ namespace Slimepen.Repositories
         };
         public Slime GetSlime(Guid id)
         {
-            return Slimes.First(slime => slime.ID == id);
+            return Slimes.FirstOrDefault(slime => slime.ID == id);
         }
         public List<Slime> GetAllSlimes()
         {
@@ -48,7 +48,7 @@ namespace Slimepen.Repositories
             var randNum = random.Next(2);
 
             var sex = 'F';
-            if (randNum == 0) sex = 'F';
+            if (randNum == 0) sex = 'M';
 
             var color = Hexadecimal.AverageHex(slime1.Color, slime2.Color);
 

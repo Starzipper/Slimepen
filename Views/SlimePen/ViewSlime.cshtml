@@ -14,36 +14,32 @@
 <body>
     <div id="game-board">
         <div class="panel panel-game">
-            <div class="panel-heading">
-                <h2 class="panel-title">@Model.Name</h2>
-                <form method="post" asp-action="RenameSlime">
-                    <div class="form-group">
-                        <label for="Name">Name:</label>
-                        <input type="hidden" name="id" value="@Model.ID"/>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter new name" asp-for="Name" value="@Model.Name" required/>
+            <div class="panel-body row justify-content-center">
+                <div class="col-4">
+                    <div class="slime">
+                        <h1 class="panel-title">@Model.Name</h1>
+                        <button onclick="renameSlime()" class="btn btn-game">Rename</button>
+                        <br/>
+                        <form method="post" asp-action="RenameSlime" id="rename" style="display:none">
+                            <div class="form-group">
+                                <label for="Name">Name:</label>
+                                <input type="hidden" name="id" value="@Model.ID"/>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter new name" asp-for="Name" value="@Model.Name" required/>
+                            </div>
+                            <button type="submit" class="btn btn-game">Submit</button>
+                        </form>
+                        <img src="~/images/slimeimage.png" class="slime-img" data-color="#@Model.Color" data-sex="@Model.Sex" />
+                        <p>Color: #@Model.Color</p>
+                        <p>Sex: @Model.Sex</p>
+                        <form method="post" asp-action="DeleteSlime">
+                            <div class="form-group">
+                                <input type="hidden" name="id" value="@Model.ID"/>
+                            </div>
+                            <button type="submit" class="btn btn-game">Delete Slime</button>
+                        </form>
+                        <a href="/SlimePen/Index/" class="btn btn-game">Back</a>
                     </div>
-                    <button type="submit" class="btn btn-game">Submit</button>
-                </form>
-                <img src="~/images/slimeimage.png" class="slime-img" data-color="#@Model.Color" />
-            </div>
-            <div class="panel-body">
-                <table class="table">
-                    <tr>
-                        <th>Sex</th>
-                        <th>Color</th>
-                    </tr>
-                    <tr>
-                        <td>@Model.Sex</td>
-                        <td>@Model.Color</td>
-                    </tr>
-                </table>
-                <form method="post" asp-action="DeleteSlime">
-                    <div class="form-group">
-                        <input type="hidden" name="id" value="@Model.ID"/>
-                    </div>
-                    <button type="submit" class="btn btn-game">Delete Slime</button>
-                </form>
-                <a href="/SlimePen/Index/" class="btn btn-game">Back</a>
+                </div>
             </div>
         </div>
     </div>
@@ -54,5 +50,11 @@
         slimes.forEach(function (slime, currentIndex, slimeList) {
             slime.style.background = slime.getAttribute("data-color");
         });
+
+        function renameSlime() {
+            var renameInput = document.getElementById("rename");
+            renameInput.style.display = "block";
+        }
     </script>
 </body>
+</html>

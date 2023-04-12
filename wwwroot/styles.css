@@ -32,6 +32,7 @@ body {
     max-width: 100%;
     margin-bottom: 10px;
     background-color: transparent;
+
   }
   
   .btn-game {
@@ -46,6 +47,11 @@ body {
     color: #fff;
   }
   
+  .testclass {
+      text-align: center;
+      align-content: center;
+  }
+
   select.form-control {
     max-width: 200px;
     margin-right: 10px;
