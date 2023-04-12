@@ -48,7 +48,7 @@ namespace Slimepen.Repositories
             var randNum = random.Next(2);
 
             var sex = 'F';
-            if (randNum == 0) sex = 'M';
+            if (randNum == 0) sex = 'F';
 
             var color = Hexadecimal.AverageHex(slime1.Color, slime2.Color);
 

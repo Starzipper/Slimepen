@@ -29,7 +29,7 @@
                     {
                         <div class="col-md-4">
                             <div class="slime">
-                                <img src="~/images/slimeimage.png" class="slime-img" data-color="#@slime.Color" />
+                                <img src="~/images/slimeimage.png" class="slime-img" data-color="#@slime.Color" data-sex="@slime.Sex" />
                                 <p>Name: @slime.Name</p>
                                 <p>Color: @slime.Color</p>
                                 <p>Sex: @slime.Sex</p>
@@ -45,13 +45,13 @@
                 <h2 class="panel-title">Breed a New Slime</h2>
             </div>
             <div class="panel-body">
-                <form asp-controller="SlimePen" asp-action="BreedSlime" method="post">
+                <form asp-controller="SlimePen" asp-action="BreedSlime" method="post" onsubmit="return validateForm()">
                     <div class="form-group">
                         <label for="Parent1">Parent 1:</label>
                             <select class="form-control" id="Parent1">
                                 @foreach (var slime in Model.Slimes)
                                 {
-                                    <option value="@slime.ID">@slime.Name</option>
+                                <option value="@slime.ID" id="option1" data-sex="@slime.Sex">@slime.Name</option>
                                 }
                             </select>
                     </div>
@@ -60,7 +60,7 @@
                             <select class="form-control" id="Parent2">
                                 @foreach (var slime in Model.Slimes)
                                 {
-                                    <option value="@slime.ID">@slime.Name</option>
+                                <option value="@slime.ID" id="option2" data-sex="@slime.Sex">@slime.Name</option>
                                 }
                             </select>
                     </div>
@@ -89,6 +89,24 @@
             $('#Parent2Id').val(selectedId);
         });
 
+        function validateForm() {
+            var parent1 = document.querySelector("#Parent1");
+            var parent1Sex = parent1.options[parent1.selectedIndex].getAttribute('data-sex');
+            var parent2 = document.getElementById("Parent2");
+            var parent2Sex = parent2.options[parent2.selectedIndex].getAttribute('data-sex');
+
+            //if (parent1 === parent2) {
+            //    alert("You cannot breed a slime with itself.");
+            //    return false;
+            //}
+            if (parent1Sex === parent2Sex) {
+                alert("You cannot yield offspring from two slimes of the same sex.");
+                return false;
+            }
+
+            return true;
+        }
+
         var slimes = document.querySelectorAll(".slime-img");
         console.log(slimes);
         slimes.forEach( function(slime, currentIndex, slimeList) {
@@ -98,6 +116,6 @@
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Custom JavaScript -->
-    <script src="~/scripts.js"></script>
+    @*<script src="~/scripts.js"></script>*@
 </body>
 </html>

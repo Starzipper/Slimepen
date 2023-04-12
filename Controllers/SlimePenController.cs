@@ -49,7 +49,7 @@ namespace Slimepen.Controllers
             //if (slime2 == null) return NotFound($"Slime (ID: {slimeID2}) not found.");
 
             //if (slime1.ID == slime2.ID) return BadRequest("You cannot breed a slime with itself.");
-            //if (slime1.Gender == slime2.Gender) return BadRequest("You cannot yield offspring from two slimes of the same sex.");
+            //if (slime1.Sex == slime2.Sex) return BadRequest("You cannot yield offspring from two slimes of the same sex.");
 
             _repository.BreedSlime(slime1, slime2);
             return RedirectToAction("Index");
