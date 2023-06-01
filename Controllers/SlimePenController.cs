@@ -42,6 +42,7 @@ namespace Slimepen.Controllers
             _repository.BreedSlime(slime1, slime2);
             return RedirectToAction("Index");
         }
+
         [HttpPost]
         public IActionResult RenameSlime(Guid id, [FromForm] string name)
         {
